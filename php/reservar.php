@@ -38,17 +38,17 @@ $conexion->close();
 if (array_intersect($intervalo_fechas, $fechas_reservadas) ) {
 	echo "la fecha <b>($fecha_ida entre $fecha_vuelta)</b> no esta disponible por que esta reservada MAKINOLA<br>";
 
-	header("Location: detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida");
+	header("Location: https://hotelmarkanando.herokuapp.com/php/detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida");
 
 } else if ($max_personas >= $num_personas){
 	include_once 'conexion2.php';
 		$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas','')";
 		$ejecutar_consulta = $conectar->query(utf8_encode($consulta));
 		$conectar->close();
-		header("Location: detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_exitosa");
+		header("Location: https://hotelmarkanando.herokuapp.com/php/detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_exitosa");
 
 } else {
-	header("Location: detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida_persona");
+	header("Location: https://hotelmarkanando.herokuapp.com/php/detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida_persona");
 }
 ;
 
