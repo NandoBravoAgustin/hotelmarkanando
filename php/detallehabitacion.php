@@ -71,7 +71,7 @@ while ($registro = $ejecutar_consulta->fetch_assoc()) {
 
 
 include_once 'conexion.php';
-$habitacion = "SELECT fecha_entrada, fecha_salida FROM reservation WHERE habitacion = '$room_actual'";
+$habitacion = "SELECT fecha_entrada, fecha_salida FROM reservas WHERE habitacion = '$room_actual'";
 $ejecutar_habitacion = $conexion->query($habitacion);
 
 
@@ -99,7 +99,7 @@ $conexion->close();
 
 					$fechas_reservadas = array();
 
-					$consulta_personas = "SELECT fecha_entrada,fecha_salida FROM reservation WHERE habitacion = '$room_actual'";
+					$consulta_personas = "SELECT fecha_entrada,fecha_salida FROM reservas WHERE habitacion = '$room_actual'";
 					$ejecutar_consulta_personas = $conectar_database->query($consulta_personas);
 					while ($registro = $ejecutar_consulta_personas->fetch_assoc()) {
 						$fecha_1 = $registro["fecha_entrada"];
