@@ -33,7 +33,7 @@ if ($modulo == "detallehabitacion") {
 <body>
 	<header id="header">
 		<nav>
-			<h2 class="title">Kadgar Hotel</h2>
+			<h2 class="title">Markanando</h2>
 			<ul>
 				<li><a href="index.php">HOME</a></li>
 				<li><a href="">ROOMS</a></li>
