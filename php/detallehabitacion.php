@@ -24,7 +24,7 @@ while ($registro = $ejecutar_consulta->fetch_assoc()) {
 <head>
 	<meta charset='UTF-8'>
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-	<title>Document</title>
+	<title>prueba 3</title>
 	<link rel='stylesheet' href='../styles.css'>
 	<link rel="stylesheet" href="../main.css">
 	<script src="../fullcalendar/lib/main.js"></script>
@@ -135,7 +135,7 @@ $conexion->close();
 	</script>
 
 <section id="reservation">
-	<form action="php/reservar.php" method="POST" name="reservar_frm" enctype="application/x-www-form-urlencoded">
+	<form action="reservar.php" method="POST" name="reservar_frm" enctype="application/x-www-form-urlencoded">
 		<?php 
 			error_reporting(E_ALL ^ E_NOTICE);
 
