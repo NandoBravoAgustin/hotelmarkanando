@@ -135,7 +135,7 @@ $conexion->close();
 	</script>
 
 <section id="reservation">
-	<form action="reservar.php" method="POST" name="reservar_frm" enctype="application/x-www-form-urlencoded">
+	<form action="php/reservar.php" method="POST" name="reservar_frm" enctype="application/x-www-form-urlencoded">
 		<?php 
 			error_reporting(E_ALL ^ E_NOTICE);
 
