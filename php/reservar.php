@@ -8,11 +8,11 @@ $fechas_reservadas = array();
 
 // Fechas a reservar
 include_once 'conexion2.php';
-$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas','3')";
+$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas','')";
 $ejecutar_consulta = $conectar->query(utf8_encode($consulta));
 $conectar->close();
 
-echo "reserva exitosa";
+echo "reserva exitosa".$room_actual."<br>".$fecha_ida." - ".$fecha_vuelta."<br>".$num_personas;
 
 
 
