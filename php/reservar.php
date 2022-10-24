@@ -42,7 +42,7 @@ if (array_intersect($intervalo_fechas, $fechas_reservadas) ) {
 
 } else if ($max_personas >= $num_personas){
 	include_once 'conexion2.php';
-		$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas','2')";
+		$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas',null)";
 		$ejecutar_consulta = $conectar->query(utf8_encode($consulta));
 		$conectar->close();
 		header("Location: https://hotelmarkanando.herokuapp.com/php/detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_exitosa");
