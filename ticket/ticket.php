@@ -5,7 +5,7 @@
     $fecha_ida = $_GET["fecha_ida"];
     $fecha_vuelta = $_GET["fecha_vuelta"];
     $num_personas = $_GET["num_personas"];
-    $numero_reserva = $_GET["numero_reserva"];
+    
     $price = $_GET["price"];
 
     # Incluyendo librerias necesarias #
