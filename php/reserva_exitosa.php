@@ -17,13 +17,12 @@
 				$fecha_ida = $_GET["fecha_ida"];
 				$fecha_vuelta = $_GET["fecha_vuelta"];
 				$num_personas = $_GET["num_personas"];
-				$numero_reserva = $_GET["numero_reserva"];
 				$price = $_GET["price"];
 
 
 
 
-			echo "<a href='../ticket/ticket.php?room=$room_actual&fecha_ida=$fecha_ida&fecha_vuelta=$fecha_vuelta&num_personas=$num_personas&numero_reserva=$numero_reserva&price=$price' download='doc.pdf'>Descargar Comprobante</a>"; ?>
+			echo "<a href='../ticket/ticket.php?room=$room_actual&fecha_ida=$fecha_ida&fecha_vuelta=$fecha_vuelta&num_personas=$num_personas&price=$price' download='doc.pdf'>Descargar Comprobante</a>"; ?>
 			
 		</div>			
 	</section>			
