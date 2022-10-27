@@ -44,15 +44,15 @@ if (array_intersect($intervalo_fechas, $fechas_reservadas) ) {
 
 } else if ($max_personas >= $num_personas){
 	include_once 'conexion2.php';
-		$number = null;
-		$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas','$number')";
+		
+		$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas',null)";
 		$ejecutar_consulta = $conectar->query(utf8_encode($consulta));
 		$conectar->close();
 		
 
 
 
-		header("Location: reserva_exitosa.php?room=$room_actual&fecha_ida=$fecha_ida&fecha_vuelta=$fecha_vuelta&num_personas=$num_personas&numero_reserva=$numero_reserva&price=$price");
+		header("Location: reserva_exitosa.php?room=$room_actual&fecha_ida=$fecha_ida&fecha_vuelta=$fecha_vuelta&num_personas=$num_personas&price=$price");
 
 } else {
 	header("Location: detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida_persona");
