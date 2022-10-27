@@ -44,7 +44,7 @@ if (array_intersect($intervalo_fechas, $fechas_reservadas) ) {
 
 } else if ($max_personas >= $num_personas){
 	include_once 'conexion2.php';
-		
+		$number = null;
 		$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas','$number')";
 		$ejecutar_consulta = $conectar->query(utf8_encode($consulta));
 		$conectar->close();
