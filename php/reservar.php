@@ -5,6 +5,7 @@ $fecha_vuelta = $_POST["fechavuelta_dat"];
 $num_personas = $_POST["personas_num"];
 $numero_reserva = $_POST["numreserva_hid"];
 $fechas_reservadas = array();
+$price = $_POST["price_hid"];
 
 
 
@@ -34,21 +35,27 @@ $ejecutar_consulta_persona = $conexion->query($consulta_persona);
 $registro_personas = $ejecutar_consulta_persona->fetch_assoc();
 $max_personas = $registro_personas["person"];
 $conexion->close();
+
 // reservar
 if (array_intersect($intervalo_fechas, $fechas_reservadas) ) {
 	echo "la fecha <b>($fecha_ida entre $fecha_vuelta)</b> no esta disponible por que esta reservada MAKINOLA<br>";
 
-	header("Location: https://hotelmarkanando.herokuapp.com/php/detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida");
+	header("Location: detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida");
 
 } else if ($max_personas >= $num_personas){
 	include_once 'conexion2.php';
-		$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas',null)";
+		
+		$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas','$number')";
 		$ejecutar_consulta = $conectar->query(utf8_encode($consulta));
 		$conectar->close();
-		header("Location: https://hotelmarkanando.herokuapp.com/php/detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_exitosa");
+		
+
+
+
+		header("Location: reserva_exitosa.php?room=$room_actual&fecha_ida=$fecha_ida&fecha_vuelta=$fecha_vuelta&num_personas=$num_personas&numero_reserva=$numero_reserva&price=$price");
 
 } else {
-	header("Location: https://hotelmarkanando.herokuapp.com/php/detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida_persona");
+	header("Location: detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida_persona");
 }
 ;
 
