@@ -5,8 +5,11 @@
     $fecha_ida = $_GET["fecha_ida"];
     $fecha_vuelta = $_GET["fecha_vuelta"];
     $num_personas = $_GET["num_personas"];
-    
+    $id_reserva = $_GET["id"];
     $price = $_GET["price"];
+    $dni = $_GET["dni"];
+    $cliente = $_GET["cliente"];
+
 
     # Incluyendo librerias necesarias #
     require "./code128.php";
@@ -33,15 +36,15 @@
     $pdf->MultiCell(0,5,utf8_decode("Caja Nro: 1"),0,'C',false);
     $pdf->MultiCell(0,5,utf8_decode("Cajero: Nando Bravo"),0,'C',false);
     $pdf->SetFont('Arial','B',10);
-    $pdf->MultiCell(0,5,utf8_decode(strtoupper("Ticket Nro: 1")),0,'C',false);
+    $pdf->MultiCell(0,5,utf8_decode(strtoupper("Codigo de Reserva : ".$id_reserva)),0,'C',false);
     $pdf->SetFont('Arial','',9);
 
     $pdf->Ln(1);
     $pdf->Cell(0,5,utf8_decode("------------------------------------------------------"),0,0,'C');
     $pdf->Ln(5);
 
-    $pdf->MultiCell(0,5,utf8_decode("Cliente: Ramiro Cortez"),0,'C',false);
-    $pdf->MultiCell(0,5,utf8_decode("Documento: DNI 44204551"),0,'C',false);
+    $pdf->MultiCell(0,5,utf8_decode("Cliente : ".$cliente),0,'C',false);
+    $pdf->MultiCell(0,5,utf8_decode("Documento: DNI ".$dni),0,'C',false);
     $pdf->MultiCell(0,5,utf8_decode("Teléfono: +54 9 3522 455475"),0,'C',false);
     $pdf->MultiCell(0,5,utf8_decode("Dirección: Buenos Aires, Argentina"),0,'C',false);
 
@@ -65,7 +68,7 @@
     /*----------  Detalles de la tabla  ----------*/
 
     $pdf->Ln(1);
-    $pdf->MultiCell(0,5,utf8_decode(strtoupper("||Reserva / habitacion : ".$room_actual."||")),0,'C',false);
+    $pdf->MultiCell(0,5,utf8_decode(strtoupper("||Reserva / habitacion : ").$room_actual."||"),0,'C',false);
     $pdf->Ln(2);
     $pdf->Cell(10,4,utf8_decode($num_personas),0,0,'C');
     $pdf->Cell(19,4,utf8_decode($fecha_ida."  /"),0,0,'C');
@@ -139,4 +142,4 @@
     $pdf->MultiCell(0,5,utf8_decode("COD002001V0001"),0,'C',false);
     
     # Nombre del archivo PDF #
-    $pdf->Output("I","Ticket.pdf",true);
+    $pdf->Output("I","Ticket_".$cliente."_$id_reserva.pdf",true);
