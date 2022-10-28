@@ -63,6 +63,7 @@ while ($registro = $ejecutar_consulta->fetch_assoc()) {
 		 			</div>
 		 			<div class='room-target__base__paragraph'>
 		 				<p>$select_description</p>
+		 				<h3>$select_price$ / por Noche</h3>
 		 			</div>
 		 		</div>
 		 	</div>
@@ -84,6 +85,7 @@ $ejecutar_habitacion = $conexion->query($habitacion);
 $conexion->close();
 
 	 ?>
+	 
 </section>
 
 <script>
@@ -154,14 +156,16 @@ $conexion->close();
 
 
 		<h3>Reservar esta habitacion</h3>
-		
-		
+		<label for="nombre">Tu Nombre</label>
+		<input type="text" name="nombre_txt" maxlength="25" pattern="[a-Z]{25}" required placeholder="Escribe tu nombre" accesskey="b">
+		<label for="dni">Tu DNI</label>
+		<input id="dni" name="dni_txt" maxlength="8" type="text" pattern="[0-9]{8}" required title="Debes poner 8 numeros" placeholder="Escribe tu DNI">
 		<label for="fechaida">Fecha de entrada</label>
 		<input id="fechaida" type="date" name="fechaida_dat" min=<?php $hoy=date("Y-m-d");echo $hoy; ?>>
 		<label for="fechavuelta">Fecha de salida</label>
 		<input id="fechavuelta" type="date" name="fechavuelta_dat" min=<?php $hoy=date("Y-m-d");echo $hoy; ?>>
 		<label for="personas">Cantidad de Personas</label>
-		<input id="personas" type="number" name="personas_num" placeholder="Cantidad de personas">
+		<input id="personas" max=20 type="number" name="personas_num" placeholder="Cantidad de personas">
 		<input type="submit" name="enviar_btn">
 		<input type="hidden" name="room_hid" value="<?php echo $room_actual ?>">
 		<input type="hidden" name="numreserva_hid">
@@ -176,6 +180,13 @@ $conexion->close();
 		<div id="calendar"></div>
 	</div>
 </section>
+
+<script>	
+
+
+
+</script>									
+
 	
 </body>
 </html>
