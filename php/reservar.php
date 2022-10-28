@@ -1,3 +1,4 @@
+
 <?php 
 $room_actual = $_POST["room_hid"];
 $fecha_ida = $_POST["fechaida_dat"];
@@ -6,7 +7,8 @@ $num_personas = $_POST["personas_num"];
 $numero_reserva = $_POST["numreserva_hid"];
 $fechas_reservadas = array();
 $price = $_POST["price_hid"];
-
+$cliente = $_POST["nombre_txt"];
+$dni = $_POST["dni_txt"];
 
 
 // Fechas a reservar
@@ -46,30 +48,26 @@ if (array_intersect($intervalo_fechas, $fechas_reservadas) ) {
 	include_once 'conexion2.php';
 		
 		$consulta = "INSERT INTO reservation (habitacion, fecha_entrada, fecha_salida, cantidad_personas,id) VALUES ('$room_actual','$fecha_ida','$fecha_vuelta','$num_personas',null)";
+		
 		$ejecutar_consulta = $conectar->query(utf8_encode($consulta));
 		$conectar->close();
-		
+	include_once 'conexion3.php';	
+		$id_consulta_reserva = "SELECT id FROM reservation WHERE fecha_entrada = '$fecha_ida'";
+		$ejecutar_id_consulta_reserva = $conectar_database->query($id_consulta_reserva);
+		$reg_id_reserva = $ejecutar_id_consulta_reserva->fetch_assoc();
+		$id_reserva = $reg_id_reserva['id'];
 
 
-
-		header("Location: reserva_exitosa.php?room=$room_actual&fecha_ida=$fecha_ida&fecha_vuelta=$fecha_vuelta&num_personas=$num_personas&price=$price");
+		header("Location: reserva_exitosa.php?id=$id_reserva&room=$room_actual&fecha_ida=$fecha_ida&fecha_vuelta=$fecha_vuelta&num_personas=$num_personas&price=$price&cliente=$cliente&dni=$dni");
+	$conectar_database->close();
 
 } else {
 	header("Location: detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida_persona");
 }
 ;
 
-	// foreach ($fechas_reservadas as $key => $value) {
-	// 	echo $key." : ".$value."<br>";
-	// };
-
-
-	
-
-
-//esto es para demostrar qu si se pudo crear el array
-
 
 
 
  ?>
+
