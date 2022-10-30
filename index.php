@@ -27,7 +27,7 @@ if ($modulo == "detallehabitacion") {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Prueba 3</title>
+	<title>Markanando Hotel</title>
 	<link rel="stylesheet" href="styles.css">
 	
 </head>
@@ -47,7 +47,7 @@ if ($modulo == "detallehabitacion") {
 		<div class="menu">
 			<img src="img/menu.png" alt="">
 		</div>
-		<a href="" class="reservation">RESERVATION</a>
+		
 	</header>
 	<main>
 		<!-- <a href="" class="reservation mobile">RESERVATION</a> -->
