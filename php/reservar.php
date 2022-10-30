@@ -30,6 +30,8 @@ while ($registro = $ejecutar_consulta->fetch_assoc()) {
 		array_push($fechas_reservadas, $i);	
 	};
 };
+	$dias = count($fechas_reservadas);
+	$total = $dias * $price;
 
 
 $consulta_persona = "SELECT person FROM rooms WHERE nombre = '$room_actual'";
@@ -40,9 +42,8 @@ $conexion->close();
 
 // reservar
 if (array_intersect($intervalo_fechas, $fechas_reservadas) ) {
-	echo "la fecha <b>($fecha_ida entre $fecha_vuelta)</b> no esta disponible por que esta reservada MAKINOLA<br>";
-
-	header("Location: detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida");
+	
+	header("Location: reserva_fallida.php?room=$room_actual");			
 
 } else if ($max_personas >= $num_personas){
 	include_once 'conexion2.php';
@@ -58,11 +59,11 @@ if (array_intersect($intervalo_fechas, $fechas_reservadas) ) {
 		$id_reserva = $reg_id_reserva['id'];
 
 
-		header("Location: reserva_exitosa.php?id=$id_reserva&room=$room_actual&fecha_ida=$fecha_ida&fecha_vuelta=$fecha_vuelta&num_personas=$num_personas&price=$price&cliente=$cliente&dni=$dni");
+		header("Location: reserva_exitosa.php?id=$id_reserva&room=$room_actual&fecha_ida=$fecha_ida&fecha_vuelta=$fecha_vuelta&num_personas=$num_personas&price=$price&cliente=$cliente&dni=$dni&total=$total&dias=$dias");
 	$conectar_database->close();
 
 } else {
-	header("Location: detallehabitacion.php?modulo=detallehabitacion&room=$room_actual&mensaje=reserva_fallida_persona");
+	header("Location: reserva_fallida_personas.php?room=$room_actual");
 }
 ;
 
