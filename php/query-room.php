@@ -14,7 +14,7 @@ while ($registro = $ejecutar_consulta->fetch_assoc()) {
 	$select_star = utf8_encode($registro["star"]);
 
 	echo "
-	<a href=''>
+	
 		<div class='rooms__base__box'>
 			<div class='rooms__img'>
 				<img src='img/rooms/room1.jpg' class='rooms__img'>
@@ -62,7 +62,7 @@ while ($registro = $ejecutar_consulta->fetch_assoc()) {
 			</div>
 			</div>
 	</div>
-	</a>
+	
 
 
 	";
