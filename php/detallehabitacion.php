@@ -76,10 +76,7 @@ $habitacion = "SELECT fecha_entrada, fecha_salida FROM reservation WHERE habitac
 $ejecutar_habitacion = $conexion->query($habitacion);
 
 
-// while ($reg = $ejecutar_habitacion->fetch_assoc()) {
-	
-// 	echo "Desde ".$reg['fecha_entrada']." hasta  ".$reg['fecha_salida']."<br>";
-// }
+
 
 
 $conexion->close();
@@ -113,7 +110,8 @@ $conexion->close();
 				   			title: 'Reservado',
 				   			start:'$i',
 					   		color:'red',
-					   		textColor:'white'
+					   		textColor:'white',
+					   		
 				   		},";
 						};
 
@@ -138,38 +136,29 @@ $conexion->close();
 
 <section id="reservation">
 	<form action="reservar.php" method="POST" name="reservar_frm" enctype="application/x-www-form-urlencoded">
-		<?php 
-			error_reporting(E_ALL ^ E_NOTICE);
-
-			if ($_GET["mensaje"]=="reserva_exitosa") {
-				echo "<h2>Reserva exitosa</h2><br><br><a href='../ticket/ticket.php' target='_blank'>Descargar Recibo</a>";
-
-			} else if ($_GET["mensaje"]=="reserva_fallida"){
-				echo "<h2>La reserva no se pudo hacer por que dentro de la fecha ingresada esta reservada</h2><br><br>";
-			} else if ($_GET["mensaje"]=="reserva_fallida_persona") {
-				echo "<h2>La reserva no se pudo hacer por que la cantidad de personas son demasiadas</h2><br><br>";
-			}
-
-		 ?>
+		
 
 
 
 
 		<h3>Reservar esta habitacion</h3>
 		<label for="nombre">Tu Nombre</label>
-		<input type="text" name="nombre_txt" maxlength="25" pattern="[a-Z]{25}" required placeholder="Escribe tu nombre" accesskey="b">
+		<input type="text" name="nombre_txt" maxlength="25"  required placeholder="Escribe tu nombre" accesskey="b" id="nombre" pattern="[a-Z]{25}">
 		<label for="dni">Tu DNI</label>
-		<input id="dni" name="dni_txt" maxlength="8" type="text" pattern="[0-9]{8}" required title="Debes poner 8 numeros" placeholder="Escribe tu DNI">
+		<input id="dni" name="dni_txt" maxlength="8" type="text" pattern="[0-9]{8}" required title="Debes poner 8 numeros" placeholder="Escribe tu DNI" min="5000000">
+		<p id="mensajeInputDni"></p>
 		<label for="fechaida">Fecha de entrada</label>
-		<input id="fechaida" type="date" name="fechaida_dat" min=<?php $hoy=date("Y-m-d");echo $hoy; ?>>
+		<input id="fechaida" type="date" name="fechaida_dat" min=<?php $hoy=date("Y-m-d");echo $hoy; ?> required >
 		<label for="fechavuelta">Fecha de salida</label>
-		<input id="fechavuelta" type="date" name="fechavuelta_dat" min=<?php $hoy=date("Y-m-d");echo $hoy; ?>>
+		<input id="fechavuelta" type="date" name="fechavuelta_dat" min="" required disabled>
 		<label for="personas">Cantidad de Personas</label>
-		<input id="personas" max=20 type="number" name="personas_num" placeholder="Cantidad de personas">
+		<input id="personas" max=20 type="number" name="personas_num" placeholder="Cantidad de personas" min="1">
+		<p id="mensajeInputPersonas"></p>
 		<input type="submit" name="enviar_btn">
 		<input type="hidden" name="room_hid" value="<?php echo $room_actual ?>">
 		<input type="hidden" name="numreserva_hid">
 		<input type="hidden" name="price_hid" value="<?php echo $select_price?>">
+		<p id="total"></p>
 	</form>
 
 </section>
@@ -181,12 +170,87 @@ $conexion->close();
 	</div>
 </section>
 
-<script>	
+<script>
+//fechas
+const fechaInput = document.getElementById("fechaida");
+const fechaInput2 = document.getElementById("fechavuelta");
+
+
+fechaInput.onchange = function () {
+	const fechaMin = fechaInput.value;
+	fechaInput2.setAttribute('min',`${fechaInput.value}`);
+	fechaInput2.removeAttribute('disabled');	
+}
+fechaInput2.onchange = function () {
+
+	const stringFecha = JSON.stringify(fechaInput.value);
+	const nuevaFecha = stringFecha.slice(1,-1);
+	const arrFecha = nuevaFecha.split('-');
+	const año = parseInt(arrFecha[0]);
+	const mes = parseInt(arrFecha[1]);
+	const dia = parseInt(arrFecha[2]);
+	const fecha1 = new Date(año, mes - 1, dia);
 
 
 
+
+	// convertir el valor de input a formato Date();fecha2
+	const stringFecha2 = JSON.stringify(fechaInput2.value);
+	const nuevaFecha2 = stringFecha2.slice(1,-1);
+	const arrFecha2 = nuevaFecha2.split('-');
+	// console.log(arrFecha2)
+	
+	const año2 = parseInt(arrFecha2[0]);
+	const mes2 = parseInt(arrFecha2[1]);
+	const dia2 = parseInt(arrFecha2[2]);
+
+	const fecha2 = new Date(año2, mes2 - 1, dia2);
+	
+	// RESTAR FECHA
+	function calcularDiferenciaDias(fecha1, fecha2) {
+		let diferencia = (fecha2 - fecha1) / (1000 * 60 * 60 * 24);
+		return Math.floor(diferencia);
+	};
+	// console.log(calcularDiferenciaDias(fecha1, fecha2));
+	const totalDias = calcularDiferenciaDias(fecha1, fecha2) + 1;
+	const totalPagar = totalDias * <?php echo $select_price; ?>;
+	console.log(totalPagar);
+
+	const totalSpan = document.querySelector('#reservation #total');
+	totalSpan.innerHTML = `Total a Pagar :<span>${totalPagar}$ USD</span>`;
+
+	
+	
+}
 </script>									
+<script>
+	const inputPersonas = document.getElementById('personas');
+	const inputDni = document.getElementById('dni');
 
+	inputPersonas.onchange = function () {
+			const mensajePersonas = document.getElementById('mensajeInputPersonas');
+		if (!(inputPersonas.value <= 20)) {
+			mensajePersonas.innerHTML = `No puede ser mas de 20 personas`;	
+		} 
+		else if(inputPersonas.value < 1){
+			mensajePersonas.innerHTML = `No puede ser menor a 1`;
+		}
+		else{
+			mensajePersonas.innerHTML = ``;
+		}
+	}
+	inputDni.onchange = function () {
+		const mensajeDni = document.getElementById('mensajeInputDni');
+		if (inputDni.value < 5000000){
+			mensajeDni.innerHTML = `El dni no puede ser menor a 5.000.000`;
+		}
+		else {
+			mensajeDni.innerHTML = ``;
+		}
+	}
+
+
+</script>
 	
 </body>
 </html>
