@@ -36,6 +36,9 @@ while ($registro = $ejecutar_consulta->fetch_assoc()) {
 </head>
 
 <body>
+	<div>
+		<p translate="no">hello!</p>
+	</div>
 <section id='room-select'>
 	<?php 
 	echo "	
