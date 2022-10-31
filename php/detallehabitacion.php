@@ -90,7 +90,7 @@ $conexion->close();
 		  var calendarEl = document.getElementById('calendar');
 		  var calendar = new FullCalendar.Calendar(calendarEl, {
 		    initialView: 'dayGridMonth',
-		   locale:"es",
+		   locale:"en",
 		   events:[
 		   <?php 
 					$room_actual = $_GET["room"];
