@@ -27,7 +27,7 @@ $dias = $_GET["dias"];
 	$item->currency_id = 'ARS';
 	$preference->items = array($item);
 	$preference->back_urls = array(
-		'success' => 'http://localhost/hotel/php/reservar.php?room='.$room.'&fecha_ida='.$fecha_ida.'&fecha_vuelta='.$fecha_vuelta.'&num_personas='.$num_personas.'&price='.$price.'&cliente='.$cliente.'&dni='.$dni.'&total='.$total.'&dias='.$dias
+		'success' => 'https://hotelmarkanando.herokuapp.com/php/reservar.php?room='.$room.'&fecha_ida='.$fecha_ida.'&fecha_vuelta='.$fecha_vuelta.'&num_personas='.$num_personas.'&price='.$price.'&cliente='.$cliente.'&dni='.$dni.'&total='.$total.'&dias='.$dias
 	);
 	
 	$preference->save();
