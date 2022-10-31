@@ -36,9 +36,7 @@ while ($registro = $ejecutar_consulta->fetch_assoc()) {
 </head>
 
 <body>
-	<div>
-		<p>hello!</p>
-	</div>
+	
 <section id='room-select'>
 	<?php 
 	echo "	
@@ -169,7 +167,7 @@ $conexion->close();
 <section id="calendario">
 	<h2>Comprueba que tu fecha este disponible antes de reservar</h2>
 	<div class="container_calendario">
-		<div id="calendar"></div>
+		<div translate="no" id="calendar"></div>
 	</div>
 </section>
 
