@@ -37,7 +37,7 @@ while ($registro = $ejecutar_consulta->fetch_assoc()) {
 
 <body>
 	<div>
-		<p translate="no">hello!</p>
+		<p>hello!</p>
 	</div>
 <section id='room-select'>
 	<?php 
