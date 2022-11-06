@@ -86,3 +86,9 @@ if ($modulo == "detallehabitacion") {
 	<script src="scripts.js"></script>
 </body>
 </html>
+<?php 
+
+	$ip = $_SERVER["REMOTE_ADDR"];
+	echo "prueba_tu_ip_es".$ip;
+
+ ?>
